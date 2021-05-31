@@ -38,46 +38,9 @@ protected:
 
   // utility methods
   bool finalStepDone() { return finalDone_; }
-  //MonitorElement *get(DQMStore::IGetter &iGetter, const std::string &name);
   void remove(DQMStore::IBooker &iBooker, DQMStore::IGetter &iGetter, const std::string &name);
 
-  /*MonitorElement *bookH1andDivide(DQMStore::IBooker &iBooker,
-                                  DQMStore::IGetter &,
-                                  const std::string &name,
-                                  MonitorElement *num,
-                                  MonitorElement *denom,
-                                  const std::string &titleX,
-                                  const std::string &titleY,
-                                  const std::string &title = "");
-
-  MonitorElement *bookH1andDivide(DQMStore::IBooker &iBooker,
-                                  DQMStore::IGetter &iGetter,
-                                  const std::string &name,
-                                  const std::string &num,
-                                  const std::string &denom,
-                                  const std::string &titleX,
-                                  const std::string &titleY,
-                                  const std::string &title = "");*/
-
-  /*MonitorElement *bookH2andDivide(DQMStore::IBooker &iBooker,
-                                  DQMStore::IGetter &,
-                                  const std::string &name,
-                                  MonitorElement *num,
-                                  MonitorElement *denom,
-                                  const std::string &titleX,
-                                  const std::string &titleY,
-                                  const std::string &title = "");
-
-  MonitorElement *bookH2andDivide(DQMStore::IBooker &iBooker,
-                                  DQMStore::IGetter &,
-                                  const std::string &name,
-                                  const std::string &num,
-                                  const std::string &denom,
-                                  const std::string &titleX,
-                                  const std::string &titleY,
-                                  const std::string &title = "");*/
-
-  MonitorElement *profileX(DQMStore::IBooker &iBooker,
+  /*MonitorElement *profileX(DQMStore::IBooker &iBooker,
                            DQMStore::IGetter &iGetter,
                            MonitorElement *me2d,
                            const std::string &title = "",
@@ -123,14 +86,11 @@ protected:
                           DQMStore::IGetter &,
                           const std::string &name,
                           const std::string &original,
-                          const std::string &title = "");
+                          const std::string &title = "");*/
 
 private:
-  //std::vector<std::string> histoNames_;
   bool finalDone_;
 
-  // utility methods
-  //const std::string *find(DQMStore::IGetter &iGetter, const std::string &name);
 };
 
 #endif

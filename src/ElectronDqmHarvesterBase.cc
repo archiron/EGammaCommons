@@ -87,109 +87,11 @@ void ElectronDqmHarvesterBase::dqmEndJob(DQMStore::IBooker &iBooker, DQMStore::I
   finalize(iBooker, iGetter);
 }
 
-/*ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::get(DQMStore::IGetter &iGetter,
-                                                                        const std::string &name) {
-  const std::string *fullName = find(iGetter, name);
-  if (fullName) {
-    return iGetter.get(inputInternalPath_ + "/" + *fullName);
-  } else {
-    return nullptr;
-  }
-}*/
-
 void ElectronDqmHarvesterBase::remove(DQMStore::IBooker &iBooker, DQMStore::IGetter &iGetter, const std::string &name) {
   // TODO: remove no longer supported in DQMStore.
 }
 
-/*ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH1andDivide(DQMStore::IBooker &iBooker,
-                                                                                    DQMStore::IGetter &iGetter,
-                                                                                    const std::string &name,
-                                                                                    const std::string &num,
-                                                                                    const std::string &denom,
-                                                                                    const std::string &titleX,
-                                                                                    const std::string &titleY,
-                                                                                    const std::string &title) {
-  return bookH1andDivide(iBooker, iGetter, name, get(iGetter, num), get(iGetter, denom), titleX, titleY, title);
-}
-
-ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH1andDivide(DQMStore::IBooker &iBooker,
-                                                                                    DQMStore::IGetter &iGetter,
-                                                                                    const std::string &name,
-                                                                                    MonitorElement *num,
-                                                                                    MonitorElement *denom,
-                                                                                    const std::string &titleX,
-                                                                                    const std::string &titleY,
-                                                                                    const std::string &title) {
-  if ((!num) || (!denom))
-    return nullptr;
-  iBooker.setCurrentFolder(outputInternalPath_);
-  std::string name2 = newName(name);
-  TH1F *h_temp = (TH1F *)num->getTH1F()->Clone(name2.c_str());
-  h_temp->Reset();
-  h_temp->Divide(num->getTH1(), denom->getTH1(), 1, 1, "b");
-  h_temp->GetXaxis()->SetTitle(titleX.c_str());
-  h_temp->GetYaxis()->SetTitle(titleY.c_str());
-  if (!title.empty()) {
-    h_temp->SetTitle(title.c_str());
-  }
-  //if (verbosity_ > 0) {
-  if (verbosity() > 0) {
-    h_temp->Print();
-  }
-  MonitorElement *me = iBooker.book1D(name2, h_temp);
-  if (bookEfficiencyFlag_) {
-  //if (bookEfficiencyFlag()) {
-    me->setEfficiencyFlag();
-  }
-  delete h_temp;
-  return me;
-}*/
-
-/*ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH2andDivide(DQMStore::IBooker &iBooker,
-                                                                                    DQMStore::IGetter &iGetter,
-                                                                                    const std::string &name,
-                                                                                    const std::string &num,
-                                                                                    const std::string &denom,
-                                                                                    const std::string &titleX,
-                                                                                    const std::string &titleY,
-                                                                                    const std::string &title) {
-  return bookH2andDivide(iBooker, iGetter, name, get(iGetter, num), get(iGetter, denom), titleX, titleY, title);
-}
-
-ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH2andDivide(DQMStore::IBooker &iBooker,
-                                                                                    DQMStore::IGetter &iGetter,
-                                                                                    const std::string &name,
-                                                                                    MonitorElement *num,
-                                                                                    MonitorElement *denom,
-                                                                                    const std::string &titleX,
-                                                                                    const std::string &titleY,
-                                                                                    const std::string &title) {
-  if ((!num) || (!denom))
-    return nullptr;
-  iBooker.setCurrentFolder(outputInternalPath_);
-  std::string name2 = newName(name);
-  TH2F *h_temp = (TH2F *)num->getTH2F()->Clone(name2.c_str());
-  h_temp->Reset();
-  h_temp->Divide(num->getTH1(), denom->getTH1(), 1, 1, "b");
-  h_temp->GetXaxis()->SetTitle(titleX.c_str());
-  h_temp->GetYaxis()->SetTitle(titleY.c_str());
-  if (!title.empty()) {
-    h_temp->SetTitle(title.c_str());
-  }
-  //if (verbosity_ > 0) {
-  if (verbosity() > 0) {
-    h_temp->Print();
-  }
-  MonitorElement *me = iBooker.book2D(name2, h_temp);
-  if (bookEfficiencyFlag_) {
-  //if (bookEfficiencyFlag()) {
-    me->setEfficiencyFlag();
-  }
-  delete h_temp;
-  return me;
-}*/
-
-ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::cloneH1(DQMStore::IBooker &iBooker,
+/*ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::cloneH1(DQMStore::IBooker &iBooker,
                                                                             DQMStore::IGetter &iGetter,
                                                                             const std::string &clone,
                                                                             const std::string &original,
@@ -298,5 +200,5 @@ ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::profileY(DQM
   MonitorElement *me = iBooker.bookProfile(name2, p1_temp);
   delete p1_temp;
   return me;
-}
+}*/
 

@@ -221,7 +221,7 @@ const std::string *Globos::find(DQMStore::IGetter &iGetter, const std::string &n
       sep = ',';
     }
     oss << '.';
-    edm::LogWarning("ElectronDqmHarvesterBase::find") << oss.str();
+    edm::LogWarning("Globos::find") << oss.str();
     return nullptr;
   } else if (res.size() > 1) {
     std::ostringstream oss;
@@ -232,7 +232,7 @@ const std::string *Globos::find(DQMStore::IGetter &iGetter, const std::string &n
       sep = ',';
     }
     oss << '.';
-    edm::LogWarning("ElectronDqmHarvesterBase::find") << oss.str();
+    edm::LogWarning("Globos::find") << oss.str();
     return nullptr;
   }
   return res[0];
@@ -333,6 +333,117 @@ Globos::MonitorElement *Globos::bookH2andDivide(DQMStore::IBooker &iBooker,
     me->setEfficiencyFlag();
   }
   delete h_temp;
+  return me;
+}
+
+Globos::MonitorElement *Globos::cloneH1(DQMStore::IBooker &iBooker,
+                                                                            DQMStore::IGetter &iGetter,
+                                                                            const std::string &clone,
+                                                                            const std::string &original,
+                                                                            const std::string &title) {
+  return cloneH1(iBooker, iGetter, clone, get(iGetter, original), title);
+}
+
+Globos::MonitorElement *Globos::cloneH1(DQMStore::IBooker &iBooker,
+                                                                            DQMStore::IGetter &iGetter,
+                                                                            const std::string &name,
+                                                                            MonitorElement *original,
+                                                                            const std::string &title) {
+  if (!original)
+    return nullptr;
+  iBooker.setCurrentFolder(outputInternalPath_);
+  std::string name2 = newName(name);
+  TH1F *h_temp = (TH1F *)original->getTH1F()->Clone(name2.c_str());
+  h_temp->Reset();
+  if (!title.empty()) {
+    h_temp->SetTitle(title.c_str());
+  }
+  MonitorElement *me = iBooker.book1D(name2, h_temp);
+  delete h_temp;
+  return me;
+}
+
+Globos::MonitorElement *Globos::profileX(DQMStore::IBooker &iBooker,
+                                                                             DQMStore::IGetter &iGetter,
+                                                                             const std::string &me2d,
+                                                                             const std::string &title,
+                                                                             const std::string &titleX,
+                                                                             const std::string &titleY,
+                                                                             Double_t minimum,
+                                                                             Double_t maximum) {
+  return profileX(iBooker, iGetter, get(iGetter, me2d), title, titleX, titleY, minimum, maximum);
+}
+
+Globos::MonitorElement *Globos::profileX(DQMStore::IBooker &iBooker,
+                                                                             DQMStore::IGetter &iGetter,
+                                                                             MonitorElement *me2d,
+                                                                             const std::string &title,
+                                                                             const std::string &titleX,
+                                                                             const std::string &titleY,
+                                                                             Double_t minimum,
+                                                                             Double_t maximum) {
+  iBooker.setCurrentFolder(outputInternalPath_);
+  std::string name2 = me2d->getName() + "_pfx";
+  TProfile *p1_temp = me2d->getTH2F()->ProfileX();
+  if (!title.empty()) {
+    p1_temp->SetTitle(title.c_str());
+  }
+  if (!titleX.empty()) {
+    p1_temp->GetXaxis()->SetTitle(titleX.c_str());
+  }
+  if (!titleY.empty()) {
+    p1_temp->GetYaxis()->SetTitle(titleY.c_str());
+  }
+  if (minimum != -1111) {
+    p1_temp->SetMinimum(minimum);
+  }
+  if (maximum != -1111) {
+    p1_temp->SetMaximum(maximum);
+  }
+  MonitorElement *me = iBooker.bookProfile(name2, p1_temp);
+  delete p1_temp;
+  return me;
+}
+
+Globos::MonitorElement *Globos::profileY(DQMStore::IBooker &iBooker,
+                                                                             DQMStore::IGetter &iGetter,
+                                                                             const std::string &me2d,
+                                                                             const std::string &title,
+                                                                             const std::string &titleX,
+                                                                             const std::string &titleY,
+                                                                             Double_t minimum,
+                                                                             Double_t maximum) {
+  return profileY(iBooker, iGetter, get(iGetter, me2d), title, titleX, titleY, minimum, maximum);
+}
+
+Globos::MonitorElement *Globos::profileY(DQMStore::IBooker &iBooker,
+                                                                             DQMStore::IGetter &iGetter,
+                                                                             MonitorElement *me2d,
+                                                                             const std::string &title,
+                                                                             const std::string &titleX,
+                                                                             const std::string &titleY,
+                                                                             Double_t minimum,
+                                                                             Double_t maximum) {
+  iBooker.setCurrentFolder(outputInternalPath_);
+  std::string name2 = me2d->getName() + "_pfy";
+  TProfile *p1_temp = me2d->getTH2F()->ProfileY();
+  if (!title.empty()) {
+    p1_temp->SetTitle(title.c_str());
+  }
+  if (!titleX.empty()) {
+    p1_temp->GetXaxis()->SetTitle(titleX.c_str());
+  }
+  if (!titleY.empty()) {
+    p1_temp->GetYaxis()->SetTitle(titleY.c_str());
+  }
+  if (minimum != -1111) {
+    p1_temp->SetMinimum(minimum);
+  }
+  if (maximum != -1111) {
+    p1_temp->SetMaximum(maximum);
+  }
+  MonitorElement *me = iBooker.bookProfile(name2, p1_temp);
+  delete p1_temp;
   return me;
 }
 
