@@ -30,7 +30,6 @@ protected:
   void setBookIndex(short);
   void setBookStatOverflowFlag(const bool &);
   std::string newName(const std::string &name);
-  //int bookStatOverflowFlag() { return bookStatOverflowFlag_; }
   int verbosity() { return verbosity_; }
 
   bool histoNamesReady;

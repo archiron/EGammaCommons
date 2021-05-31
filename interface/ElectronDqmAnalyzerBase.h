@@ -35,26 +35,7 @@ protected:
 
   // utility methods
 
-/*  MonitorElement *cloneH1(DQMStore::IBooker &iBooker,
-                          const std::string &name,
-                          MonitorElement *original,
-                          const std::string &title = "");
-
-  MonitorElement *cloneH1(DQMStore::IBooker &iBooker,
-                          const std::string &name,
-                          const std::string &original,
-                          const std::string &title = "");*/
-
 private:
-  //int verbosity_;
-  //bool histoNamesReady;
-  //std::string finalStep_;
-  //std::string inputFile_;
-  //std::string outputFile_;
-  //std::string inputInternalPath_;
-  //std::string outputInternalPath_;
-
-  //std::vector<std::string> histoNames_;
 };
 
 #endif

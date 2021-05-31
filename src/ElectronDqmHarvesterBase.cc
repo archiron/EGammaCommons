@@ -16,12 +16,6 @@
 
 ElectronDqmHarvesterBase::ElectronDqmHarvesterBase(const edm::ParameterSet &conf)
     : Globos(conf), finalDone_(false) {
-  //verbosity_ = conf.getUntrackedParameter<int>("Verbosity");
-  //finalStep_ = conf.getParameter<std::string>("FinalStep");
-  //inputFile_ = conf.getParameter<std::string>("InputFile");
-  //outputFile_ = conf.getParameter<std::string>("OutputFile");
-  //inputInternalPath_ = conf.getParameter<std::string>("InputFolderName");
-  //outputInternalPath_ = conf.getParameter<std::string>("OutputFolderName");
 }
 
 ElectronDqmHarvesterBase::~ElectronDqmHarvesterBase() {}

@@ -126,14 +126,7 @@ protected:
                            Double_t maximum = -1111);
 
 private:
-  //int verbosity_;
-  //bool histoNamesReady;
   std::vector<std::string> histoNames_;
-  //std::string finalStep_;
-  //std::string inputFile_;
-  //std::string outputFile_;
-  //std::string inputInternalPath_;
-  //std::string outputInternalPath_;
   bool finalDone_;
 
   // utility methods
