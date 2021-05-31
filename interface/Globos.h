@@ -18,8 +18,6 @@ class Globos {
 public:
   typedef dqm::legacy::DQMStore DQMStore;
   typedef dqm::legacy::MonitorElement MonitorElement;
-  void setBookEfficiencyFlag(const bool &);
-  bool bookEfficiencyFlag_ = false;
 
 protected:
   explicit Globos(const edm::ParameterSet &conf);
@@ -28,20 +26,20 @@ protected:
   // utility methods
   void setBookPrefix(const std::string &);
   void setBookIndex(short);
+  void setBookEfficiencyFlag(const bool &);
   void setBookStatOverflowFlag(const bool &);
   std::string newName(const std::string &name);
   int verbosity() { return verbosity_; }
 
-  bool histoNamesReady;
+  //bool histoNamesReady;
   std::string finalStep_;
   std::string inputFile_;
   std::string outputFile_;
   std::string inputInternalPath_;
   std::string outputInternalPath_;
-  std::vector<std::string> histoNames_;
 
   MonitorElement *get(DQMStore::IGetter &iGetter, const std::string &name);
-  const std::string *find(DQMStore::IGetter &iGetter, const std::string &name);
+  //const std::string *find(DQMStore::IGetter &iGetter, const std::string &name);
 
   // Common features for ElectronDqmAnalyzerBase/ElectronDqmHarvesterBase
   MonitorElement *bookH1(DQMStore::IBooker &,
@@ -190,11 +188,15 @@ protected:
                           const std::string &title = "");
 
 private:
+  int verbosity_;
   std::string bookPrefix_;
   short bookIndex_;
+  bool bookEfficiencyFlag_ = false;
   bool bookStatOverflowFlag_ = false;
-  int verbosity_;
+  bool histoNamesReady;
+  std::vector<std::string> histoNames_;
 
+  const std::string *find(DQMStore::IGetter &iGetter, const std::string &name);
 };
 
 #endif

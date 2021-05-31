@@ -40,54 +40,6 @@ protected:
   bool finalStepDone() { return finalDone_; }
   void remove(DQMStore::IBooker &iBooker, DQMStore::IGetter &iGetter, const std::string &name);
 
-  /*MonitorElement *profileX(DQMStore::IBooker &iBooker,
-                           DQMStore::IGetter &iGetter,
-                           MonitorElement *me2d,
-                           const std::string &title = "",
-                           const std::string &titleX = "",
-                           const std::string &titleY = "",
-                           Double_t minimum = -1111,
-                           Double_t maximum = -1111);
-
-  MonitorElement *profileX(DQMStore::IBooker &iBooker,
-                           DQMStore::IGetter &iGetter,
-                           const std::string &me2d,
-                           const std::string &title = "",
-                           const std::string &titleX = "",
-                           const std::string &titleY = "",
-                           Double_t minimum = -1111,
-                           Double_t maximum = -1111);
-
-  MonitorElement *profileY(DQMStore::IBooker &iBooker,
-                           DQMStore::IGetter &iGetter,
-                           MonitorElement *me2d,
-                           const std::string &title = "",
-                           const std::string &titleX = "",
-                           const std::string &titleY = "",
-                           Double_t minimum = -1111,
-                           Double_t maximum = -1111);
-
-  MonitorElement *profileY(DQMStore::IBooker &iBooker,
-                           DQMStore::IGetter &iGetter,
-                           const std::string &me2d,
-                           const std::string &title = "",
-                           const std::string &titleX = "",
-                           const std::string &titleY = "",
-                           Double_t minimum = -1111,
-                           Double_t maximum = -1111);
-
-  MonitorElement *cloneH1(DQMStore::IBooker &iBooker,
-                          DQMStore::IGetter &,
-                          const std::string &name,
-                          MonitorElement *original,
-                          const std::string &title = "");
-
-  MonitorElement *cloneH1(DQMStore::IBooker &iBooker,
-                          DQMStore::IGetter &,
-                          const std::string &name,
-                          const std::string &original,
-                          const std::string &title = "");*/
-
 private:
   bool finalDone_;
 

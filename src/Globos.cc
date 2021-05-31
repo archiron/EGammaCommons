@@ -16,7 +16,7 @@
 #include <sstream>
 
 Globos::Globos(const edm::ParameterSet &conf)
-    : histoNamesReady(false), bookPrefix_("ele"), bookIndex_(0) {
+    : bookPrefix_("ele"), bookIndex_(0), histoNamesReady(false) {
   verbosity_ = conf.getUntrackedParameter<int>("Verbosity");
   finalStep_ = conf.getParameter<std::string>("FinalStep");
   inputFile_ = conf.getParameter<std::string>("InputFile");
@@ -28,11 +28,8 @@ Globos::Globos(const edm::ParameterSet &conf)
 Globos::~Globos() {}
 
 void Globos::setBookPrefix(const std::string &prefix) { bookPrefix_ = prefix; }
-
 void Globos::setBookIndex(short index) { bookIndex_ = index; }
-
 void Globos::setBookEfficiencyFlag(const bool &eff_flag) { bookEfficiencyFlag_ = eff_flag; }
-
 void Globos::setBookStatOverflowFlag(const bool &statOverflow_flag) {
   bookStatOverflowFlag_ = statOverflow_flag;
 }
