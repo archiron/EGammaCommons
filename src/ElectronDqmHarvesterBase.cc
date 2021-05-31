@@ -20,7 +20,7 @@ ElectronDqmHarvesterBase::ElectronDqmHarvesterBase(const edm::ParameterSet &conf
 
 ElectronDqmHarvesterBase::~ElectronDqmHarvesterBase() {}
 
-const std::string *ElectronDqmHarvesterBase::find(DQMStore::IGetter &iGetter, const std::string &name) {
+/*const std::string *ElectronDqmHarvesterBase::find(DQMStore::IGetter &iGetter, const std::string &name) {
   if (!histoNamesReady) {
     histoNamesReady = true;
     histoNames_ = iGetter.getMEs();
@@ -58,7 +58,7 @@ const std::string *ElectronDqmHarvesterBase::find(DQMStore::IGetter &iGetter, co
     return nullptr;
   }
   return res[0];
-}
+}*/
 
 void ElectronDqmHarvesterBase::beginJob() {}
 
@@ -87,7 +87,7 @@ void ElectronDqmHarvesterBase::dqmEndJob(DQMStore::IBooker &iBooker, DQMStore::I
   finalize(iBooker, iGetter);
 }
 
-ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::get(DQMStore::IGetter &iGetter,
+/*ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::get(DQMStore::IGetter &iGetter,
                                                                         const std::string &name) {
   const std::string *fullName = find(iGetter, name);
   if (fullName) {
@@ -95,13 +95,13 @@ ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::get(DQMStore
   } else {
     return nullptr;
   }
-}
+}*/
 
 void ElectronDqmHarvesterBase::remove(DQMStore::IBooker &iBooker, DQMStore::IGetter &iGetter, const std::string &name) {
   // TODO: remove no longer supported in DQMStore.
 }
 
-ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH1andDivide(DQMStore::IBooker &iBooker,
+/*ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH1andDivide(DQMStore::IBooker &iBooker,
                                                                                     DQMStore::IGetter &iGetter,
                                                                                     const std::string &name,
                                                                                     const std::string &num,
@@ -110,47 +110,6 @@ ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH1andDiv
                                                                                     const std::string &titleY,
                                                                                     const std::string &title) {
   return bookH1andDivide(iBooker, iGetter, name, get(iGetter, num), get(iGetter, denom), titleX, titleY, title);
-}
-
-ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH2andDivide(DQMStore::IBooker &iBooker,
-                                                                                    DQMStore::IGetter &iGetter,
-                                                                                    const std::string &name,
-                                                                                    const std::string &num,
-                                                                                    const std::string &denom,
-                                                                                    const std::string &titleX,
-                                                                                    const std::string &titleY,
-                                                                                    const std::string &title) {
-  return bookH2andDivide(iBooker, iGetter, name, get(iGetter, num), get(iGetter, denom), titleX, titleY, title);
-}
-
-ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::cloneH1(DQMStore::IBooker &iBooker,
-                                                                            DQMStore::IGetter &iGetter,
-                                                                            const std::string &clone,
-                                                                            const std::string &original,
-                                                                            const std::string &title) {
-  return cloneH1(iBooker, iGetter, clone, get(iGetter, original), title);
-}
-
-ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::profileX(DQMStore::IBooker &iBooker,
-                                                                             DQMStore::IGetter &iGetter,
-                                                                             const std::string &me2d,
-                                                                             const std::string &title,
-                                                                             const std::string &titleX,
-                                                                             const std::string &titleY,
-                                                                             Double_t minimum,
-                                                                             Double_t maximum) {
-  return profileX(iBooker, iGetter, get(iGetter, me2d), title, titleX, titleY, minimum, maximum);
-}
-
-ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::profileY(DQMStore::IBooker &iBooker,
-                                                                             DQMStore::IGetter &iGetter,
-                                                                             const std::string &me2d,
-                                                                             const std::string &title,
-                                                                             const std::string &titleX,
-                                                                             const std::string &titleY,
-                                                                             Double_t minimum,
-                                                                             Double_t maximum) {
-  return profileY(iBooker, iGetter, get(iGetter, me2d), title, titleX, titleY, minimum, maximum);
 }
 
 ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH1andDivide(DQMStore::IBooker &iBooker,
@@ -184,6 +143,17 @@ ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH1andDiv
   }
   delete h_temp;
   return me;
+}*/
+
+/*ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH2andDivide(DQMStore::IBooker &iBooker,
+                                                                                    DQMStore::IGetter &iGetter,
+                                                                                    const std::string &name,
+                                                                                    const std::string &num,
+                                                                                    const std::string &denom,
+                                                                                    const std::string &titleX,
+                                                                                    const std::string &titleY,
+                                                                                    const std::string &title) {
+  return bookH2andDivide(iBooker, iGetter, name, get(iGetter, num), get(iGetter, denom), titleX, titleY, title);
 }
 
 ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH2andDivide(DQMStore::IBooker &iBooker,
@@ -217,6 +187,14 @@ ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::bookH2andDiv
   }
   delete h_temp;
   return me;
+}*/
+
+ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::cloneH1(DQMStore::IBooker &iBooker,
+                                                                            DQMStore::IGetter &iGetter,
+                                                                            const std::string &clone,
+                                                                            const std::string &original,
+                                                                            const std::string &title) {
+  return cloneH1(iBooker, iGetter, clone, get(iGetter, original), title);
 }
 
 ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::cloneH1(DQMStore::IBooker &iBooker,
@@ -236,6 +214,17 @@ ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::cloneH1(DQMS
   MonitorElement *me = iBooker.book1D(name2, h_temp);
   delete h_temp;
   return me;
+}
+
+ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::profileX(DQMStore::IBooker &iBooker,
+                                                                             DQMStore::IGetter &iGetter,
+                                                                             const std::string &me2d,
+                                                                             const std::string &title,
+                                                                             const std::string &titleX,
+                                                                             const std::string &titleY,
+                                                                             Double_t minimum,
+                                                                             Double_t maximum) {
+  return profileX(iBooker, iGetter, get(iGetter, me2d), title, titleX, titleY, minimum, maximum);
 }
 
 ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::profileX(DQMStore::IBooker &iBooker,
@@ -271,6 +260,17 @@ ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::profileX(DQM
 
 ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::profileY(DQMStore::IBooker &iBooker,
                                                                              DQMStore::IGetter &iGetter,
+                                                                             const std::string &me2d,
+                                                                             const std::string &title,
+                                                                             const std::string &titleX,
+                                                                             const std::string &titleY,
+                                                                             Double_t minimum,
+                                                                             Double_t maximum) {
+  return profileY(iBooker, iGetter, get(iGetter, me2d), title, titleX, titleY, minimum, maximum);
+}
+
+ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::profileY(DQMStore::IBooker &iBooker,
+                                                                             DQMStore::IGetter &iGetter,
                                                                              MonitorElement *me2d,
                                                                              const std::string &title,
                                                                              const std::string &titleX,
@@ -299,3 +299,4 @@ ElectronDqmHarvesterBase::MonitorElement *ElectronDqmHarvesterBase::profileY(DQM
   delete p1_temp;
   return me;
 }
+

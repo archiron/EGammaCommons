@@ -198,4 +198,142 @@ std::string Globos::newName(const std::string &name) {
 }
 
 // Features for ElectronDqmHarvesterBase
+const std::string *Globos::find(DQMStore::IGetter &iGetter, const std::string &name) {
+  if (!histoNamesReady) {
+    histoNamesReady = true;
+    histoNames_ = iGetter.getMEs();
+  }
+  std::vector<const std::string *> res;
+  std::size_t nsize = name.size();
+
+  for (const auto &histoName : histoNames_) {
+    std::size_t lsize = histoName.size();
+    if ((lsize >= nsize) && (histoName.find(name) == (lsize - nsize))) {
+      res.push_back(&histoName);
+    }
+  }
+  if (res.empty()) {
+    std::ostringstream oss;
+    oss << "Histogram " << name << " not found in " << outputInternalPath_;
+    char sep = ':';
+    for (auto const &histoName : histoNames_) {
+      oss << sep << ' ' << histoName;
+      sep = ',';
+    }
+    oss << '.';
+    edm::LogWarning("ElectronDqmHarvesterBase::find") << oss.str();
+    return nullptr;
+  } else if (res.size() > 1) {
+    std::ostringstream oss;
+    oss << "Ambiguous histograms for " << name << " in " << outputInternalPath_;
+    char sep = ':';
+    for (auto const resItr : res) {
+      oss << sep << ' ' << *resItr;
+      sep = ',';
+    }
+    oss << '.';
+    edm::LogWarning("ElectronDqmHarvesterBase::find") << oss.str();
+    return nullptr;
+  }
+  return res[0];
+}
+
+Globos::MonitorElement *Globos::get(DQMStore::IGetter &iGetter,
+                                                                        const std::string &name) {
+  const std::string *fullName = find(iGetter, name);
+  if (fullName) {
+    return iGetter.get(inputInternalPath_ + "/" + *fullName);
+  } else {
+    return nullptr;
+  }
+}
+
+Globos::MonitorElement *Globos::bookH1andDivide(DQMStore::IBooker &iBooker,
+                                                                                    DQMStore::IGetter &iGetter,
+                                                                                    const std::string &name,
+                                                                                    const std::string &num,
+                                                                                    const std::string &denom,
+                                                                                    const std::string &titleX,
+                                                                                    const std::string &titleY,
+                                                                                    const std::string &title) {
+  return bookH1andDivide(iBooker, iGetter, name, get(iGetter, num), get(iGetter, denom), titleX, titleY, title);
+}
+
+Globos::MonitorElement *Globos::bookH1andDivide(DQMStore::IBooker &iBooker,
+                                                                                    DQMStore::IGetter &iGetter,
+                                                                                    const std::string &name,
+                                                                                    MonitorElement *num,
+                                                                                    MonitorElement *denom,
+                                                                                    const std::string &titleX,
+                                                                                    const std::string &titleY,
+                                                                                    const std::string &title) {
+  if ((!num) || (!denom))
+    return nullptr;
+  iBooker.setCurrentFolder(outputInternalPath_);
+  std::string name2 = newName(name);
+  TH1F *h_temp = (TH1F *)num->getTH1F()->Clone(name2.c_str());
+  h_temp->Reset();
+  h_temp->Divide(num->getTH1(), denom->getTH1(), 1, 1, "b");
+  h_temp->GetXaxis()->SetTitle(titleX.c_str());
+  h_temp->GetYaxis()->SetTitle(titleY.c_str());
+  if (!title.empty()) {
+    h_temp->SetTitle(title.c_str());
+  }
+  //if (verbosity_ > 0) {
+  if (verbosity() > 0) {
+    h_temp->Print();
+  }
+  MonitorElement *me = iBooker.book1D(name2, h_temp);
+  if (bookEfficiencyFlag_) {
+  //if (bookEfficiencyFlag()) {
+    me->setEfficiencyFlag();
+  }
+  delete h_temp;
+  return me;
+}
+
+Globos::MonitorElement *Globos::bookH2andDivide(DQMStore::IBooker &iBooker,
+                                                                                    DQMStore::IGetter &iGetter,
+                                                                                    const std::string &name,
+                                                                                    const std::string &num,
+                                                                                    const std::string &denom,
+                                                                                    const std::string &titleX,
+                                                                                    const std::string &titleY,
+                                                                                    const std::string &title) {
+  return bookH2andDivide(iBooker, iGetter, name, get(iGetter, num), get(iGetter, denom), titleX, titleY, title);
+}
+
+Globos::MonitorElement *Globos::bookH2andDivide(DQMStore::IBooker &iBooker,
+                                                                                    DQMStore::IGetter &iGetter,
+                                                                                    const std::string &name,
+                                                                                    MonitorElement *num,
+                                                                                    MonitorElement *denom,
+                                                                                    const std::string &titleX,
+                                                                                    const std::string &titleY,
+                                                                                    const std::string &title) {
+  if ((!num) || (!denom))
+    return nullptr;
+  iBooker.setCurrentFolder(outputInternalPath_);
+  std::string name2 = newName(name);
+  TH2F *h_temp = (TH2F *)num->getTH2F()->Clone(name2.c_str());
+  h_temp->Reset();
+  h_temp->Divide(num->getTH1(), denom->getTH1(), 1, 1, "b");
+  h_temp->GetXaxis()->SetTitle(titleX.c_str());
+  h_temp->GetYaxis()->SetTitle(titleY.c_str());
+  if (!title.empty()) {
+    h_temp->SetTitle(title.c_str());
+  }
+  //if (verbosity_ > 0) {
+  if (verbosity() > 0) {
+    h_temp->Print();
+  }
+  MonitorElement *me = iBooker.book2D(name2, h_temp);
+  if (bookEfficiencyFlag_) {
+  //if (bookEfficiencyFlag()) {
+    me->setEfficiencyFlag();
+  }
+  delete h_temp;
+  return me;
+}
+
 

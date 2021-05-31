@@ -38,6 +38,10 @@ protected:
   std::string outputFile_;
   std::string inputInternalPath_;
   std::string outputInternalPath_;
+  std::vector<std::string> histoNames_;
+
+  MonitorElement *get(DQMStore::IGetter &iGetter, const std::string &name);
+  const std::string *find(DQMStore::IGetter &iGetter, const std::string &name);
 
   // Common features for ElectronDqmAnalyzerBase/ElectronDqmHarvesterBase
   MonitorElement *bookH1(DQMStore::IBooker &,
@@ -101,6 +105,42 @@ protected:
 
 
   // Features for ElectronDqmHarvesterBase
+  MonitorElement *bookH1andDivide(DQMStore::IBooker &iBooker,
+                                  DQMStore::IGetter &,
+                                  const std::string &name,
+                                  MonitorElement *num,
+                                  MonitorElement *denom,
+                                  const std::string &titleX,
+                                  const std::string &titleY,
+                                  const std::string &title = "");
+
+  MonitorElement *bookH1andDivide(DQMStore::IBooker &iBooker,
+                                  DQMStore::IGetter &iGetter,
+                                  const std::string &name,
+                                  const std::string &num,
+                                  const std::string &denom,
+                                  const std::string &titleX,
+                                  const std::string &titleY,
+                                  const std::string &title = "");
+
+  MonitorElement *bookH2andDivide(DQMStore::IBooker &iBooker,
+                                  DQMStore::IGetter &,
+                                  const std::string &name,
+                                  MonitorElement *num,
+                                  MonitorElement *denom,
+                                  const std::string &titleX,
+                                  const std::string &titleY,
+                                  const std::string &title = "");
+
+  MonitorElement *bookH2andDivide(DQMStore::IBooker &iBooker,
+                                  DQMStore::IGetter &,
+                                  const std::string &name,
+                                  const std::string &num,
+                                  const std::string &denom,
+                                  const std::string &titleX,
+                                  const std::string &titleY,
+                                  const std::string &title = "");
+
 private:
   std::string bookPrefix_;
   short bookIndex_;
